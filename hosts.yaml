@@ -1,0 +1,4 @@
+target_server:
+  hosts:
+    localhost:
+      ansible_connection: local
