@@ -1,0 +1,18 @@
+---
+- name: Set environment 
+  hosts: target_server
+  become: yes
+  roles:
+    - role: install-git 
+      tags: ["install-git"]
+    - role: install-vim
+      tags: ["install-vim"]
+    - role: install-lua
+      tags: ["install-lua"]
+    - role: install-tmux
+      tags: ["install-tmux"]
+    - role: config-bashrc
+      tags: ["config-bashrc"]
+    - role: install-fonts
+      tags: ["install-fonts"]
+...
