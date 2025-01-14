@@ -1,2 +1,70 @@
 ---
+- name: Install neovim
+  ansible.builtin.get_url:
+    url: "https://github.com/neovim/neovim/archive/refs/tags/v0.10.3.tar.gz"
+    dest: /home/"{{ ansible_user }}"/Downloads
+
+- name: Install dependencies
+  become: yes
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ninja-build 
+    - gettext 
+    - cmake 
+    - unzip 
+    - curl 
+    - build-essential 
+    - ripgrep 
+    - nodejs 
+    - nmp
+
+- name: Unarchive neovim 
+  ansible.builtin.unarchive:
+    src: /home/"{{ ansible_user }}"/Downloads
+    dest: /home/"{{ ansible_user }}"/Downloads/neovim
+
+- name: Remove archive
+  ansible.builtin.file:
+    path: /home/"{{ ansible_user }}"/Downloads/v0.10.3.tar.gz
+    state: absent 
+
+- name: Make neovim
+  ansible.builtin.shell: make
+  args:
+    chdir: /home/"{{ ansible_user }}"/Downloads/neovim
+
+- name: Make install
+  ansible.builtin.shell: make install
+  become: yes
+  args:
+    chdir: /home/"{{ ansible_user }}"/Downloads/neovim
+
+- name: Remove installation directory
+  ansible.builtin.file:
+    path: /home/"{{ ansible_user }}"/Downloads/neovim
+    state: absent
+
+- name: Clone settings
+  ansible.builtin.git:
+    repo: "git@github.com:ArkadiuszStanislawLega/Neovim_lua.git"
+    dest: /home/"{{ ansible_user }}"/.config/neovim/
+    clone: yes
+
+- name: Remove gitignore
+  ansible.builtin.file:
+    path: /home/"{{ ansible_user }}"/.config/neovim/.gitignore
+    state: absent
+
+- name: Remove gitfiles
+  ansible.builtin.file:
+    path: /home/"{{ ansible_user }}"/.config/neovim/.git
+    state: absent
+
+- name: Remove readme
+  ansible.builtin.file:
+    path: /home/"{{ ansible_user }}"/.config/neovim/README.md
+    state: absent
+
 # tasks file for install-vim
