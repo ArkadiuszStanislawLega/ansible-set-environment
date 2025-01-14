@@ -1,5 +1,5 @@
 ---
-- name: Instal git
+- name: Install git
   ansible.builtin.apt:
     name: git-all
     state: present
