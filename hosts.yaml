@@ -1,4 +1,5 @@
 target_server:
   hosts:
     localhost:
+      ansible_user: "aro"
       ansible_connection: local
