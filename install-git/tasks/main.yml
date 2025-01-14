@@ -1,2 +1,6 @@
 ---
+- name: Instal git
+  ansible.builtin.apt:
+    name: git-all
+    state: present
 # tasks file for install-git
