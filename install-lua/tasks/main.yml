@@ -18,8 +18,8 @@
 - name: Create directory for lib
   become: yes
   ansible.builtin.file:
-  path: /usr/include/lua/5.4
-  state: present
+    path: /usr/include/lua/5.4
+    state: present
 
 - name: Make lua
   become: yes
