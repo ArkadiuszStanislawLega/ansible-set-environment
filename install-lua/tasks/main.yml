@@ -4,6 +4,11 @@
     url: "https://www.lua.org/ftp/lua-5.4.7.tar.gz"
     dest: /home/{{ ansible_user }}/Downloads
 
+- name: Create directory for lib
+  ansible.builtin.file:
+  path: /usr/include/lua/5.4
+  state: present
+
 - name: Unarchive lua
   become: yes
   ansible.builtin.unarchive:
