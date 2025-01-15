@@ -7,7 +7,7 @@
 - name: Unarchive lua
   become: yes
   ansible.builtin.unarchive:
-    path: /home/{{ ansible_user }}/Downloads/lua-5.4.7.tar.gz
+    src: /home/{{ ansible_user }}/Downloads/lua-5.4.7.tar.gz
     dest: /usr/include/lua/5.4
 
 - name: Remove archive
