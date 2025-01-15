@@ -1,2 +1,30 @@
 ---
+- name: Download lua
+  ansible.builtin.get_url:
+    url: "https://www.lua.org/ftp/lua-5.4.7.tar.gz"
+    dest: /home/{{ ansible_user }}/Downloads
+
+- name: Unarchive lua
+  become: yes
+  ansible.builtin.unarchive:
+    path: /home/{{ ansible_user }}/Downloads/lua-5.4.7.tar.gz
+    dest: /usr/include/lua/5.4
+
+- name: Remove archive
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/Downloads/lua-5.4.7.tar.gz
+    state: absent
+
+- name: Make lua
+  ansible.bultin.shell: make
+  become: yes
+  args: 
+    chdir: /usr/inclue/lua/5.4
+
+- name: Install lua
+  ansible.bultin.shell: make install
+  become: yes
+  args:
+    chdir: /usr/include/lua/5.4
+
 # tasks file for install-lua
