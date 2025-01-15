@@ -21,12 +21,12 @@
 
 - name: Unarchive neovim 
   ansible.builtin.unarchive:
-    src: /home/{{ ansible_user }}/Downloads/neovim-0.10.3.tar
+    src: /home/{{ ansible_user }}/Downloads/neovim-0.10.3.tar.gz
     dest: /home/{{ ansible_user }}/Downloads/
 
 - name: Remove archive
   ansible.builtin.file:
-    path: /home/{{ ansible_user }}/Downloads/neovim-10.3.tar
+    path: /home/{{ ansible_user }}/Downloads/neovim-10.3.tar.gz
     state: absent 
 
 - name: Make neovim
@@ -47,7 +47,7 @@
 
 - name: Clone settings
   ansible.builtin.git:
-    repo: "git@github.com:ArkadiuszStanislawLega/Neovim_lua.git"
+    repo: "https://github.com/ArkadiuszStanislawLega/Neovim_lua.git"
     dest: /home/{{ ansible_user }}/.config/neovim/
     clone: yes
 
@@ -58,7 +58,7 @@
 
 - name: Remove gitfiles
   ansible.builtin.file:
-    path: /home/{{ ansible_user }}/.config/neovim/.git
+    path: /home/{{ ansible_user }}/.config/nvim/.git
     state: absent
 
 - name: Remove readme
