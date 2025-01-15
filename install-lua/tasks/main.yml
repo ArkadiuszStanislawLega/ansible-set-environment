@@ -16,14 +16,14 @@
     state: absent
 
 - name: Make lua
-  ansible.bultin.shell: make
   become: yes
+  ansible.builtin.shell: make
   args: 
     chdir: /usr/inclue/lua/5.4
 
 - name: Install lua
-  ansible.bultin.shell: make install
   become: yes
+  ansible.builtin.shell: make install
   args:
     chdir: /usr/include/lua/5.4
 
