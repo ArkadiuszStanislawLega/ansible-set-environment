@@ -1,2 +1,12 @@
 ---
+- name: Add aliases
+  ansible.builtin.template:
+    src: templates/bash_aliases.j2
+    dest: /home/{{ ansible_user }}/.bash_aliases
+
+- name: Update prompt
+  ansibel.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.bashrc
+    regexp: "PS1"
+    line: "PS1='\[\033[01;32m\]\t\[\033[00m\] \w\n'"
 # tasks file for config-bashrc
