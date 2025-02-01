@@ -1,2 +1,32 @@
 ---
+- name: Create directory for fonts
+  ansible.builtin.file:
+    dest: /home/{{ ansible_user }}/.fonts
+    state: directory
+
+- name: Download Nord Fonts 
+  ansible.bulitin.get_url:
+    url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/NerdFontsSymbolsOnly.zip"
+    dest: /home/{{ ansible_user }}/Downloads
+
+- name: Download Ubuntu Mono fonts
+  ansible.bulitin.get_url:
+    url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/UbuntuMono.zip"
+    dest: /home/{{ ansible_user }}/Downloads
+
+- name: Find all zip files
+  ansible.builtin.find:
+    path: /home/{{ ansible_user }}/Downloads/
+    patterns: "*.zip"
+  register: zip_files
+
+- name: Unzip all zips  
+  ansible.builtin.unarchive:
+    src: "{{ item.path }}"
+    dest: /home/{{ ansible_user}}/Downloads
+    remote_src: yes
+  loop: "{{ zip_files.files }}"
+
+
+
 # tasks file for install-fonts
