@@ -1,13 +1,13 @@
 ---
 - name: Install tmux
   become: yes
-  ansibel.builtin.apt:
+  ansible.builtin.apt:
     name: tmux
 
 - name: Create config directory
   ansible.builtin.file:
     path: /home/{{ ansible_user }}/.config/tmux
-    state: present
+    state: directory
 
 - name: Clone settings
   ansible.builtin.git:
