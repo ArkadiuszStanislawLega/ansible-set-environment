@@ -19,7 +19,7 @@
   become: yes
   ansible.builtin.file:
     path: /usr/include/lua/5.4
-    state: present
+    state: directory
 
 - name: Make lua
   become: yes
